@@ -1,7 +1,6 @@
-﻿using System;
+﻿using BibleIndexerV2.Services.Implementations;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -18,7 +17,7 @@ namespace BibleIndexerTest
                 var expectedBookCount = 66; // The Bible has 66 books
 
                 // Act
-                var books = await BibleApi.GetAllBooksOfTheBible();
+                object books = await BibleService.GetAllBooksOfTheBible();
 
                 // Assert
                 Assert.NotNull(books);
@@ -27,12 +26,11 @@ namespace BibleIndexerTest
                 var bookList = books as List<object>;
                 Assert.Equal(expectedBookCount, bookList.Count);
 
-                var firstBook = bookList.FirstOrDefault();
+                object firstBook = bookList.FirstOrDefault();
                 Assert.NotNull(firstBook);
                 Assert.True(firstBook.GetType().GetProperty("Id") != null);
                 Assert.True(firstBook.GetType().GetProperty("Book") != null);
             }
         }
-
     }
 }
