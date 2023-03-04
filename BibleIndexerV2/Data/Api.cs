@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using BibleIndexerV2.Services.Implementations;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -17,8 +18,9 @@ namespace BibleIndexerV2.Data
         /// <Summary></Summary>:
         private static RestClient GetClient()
         {
-            var url = "";
-            
+            var url = (new ConfigurationBuilder().AddUserSecrets<BibleService>()).Build().GetSection("api_url").Value;
+
+
             _client = null ?? new RestClient(url);
             return _client;
            
