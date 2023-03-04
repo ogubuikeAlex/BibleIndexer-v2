@@ -20,7 +20,6 @@ namespace BibleIndexerV2.Data
         {
             var url = (new ConfigurationBuilder().AddUserSecrets<BibleService>()).Build().GetSection("api_url").Value;
 
-
             _client = null ?? new RestClient(url);
             return _client;
            

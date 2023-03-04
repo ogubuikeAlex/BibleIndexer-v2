@@ -198,6 +198,6 @@ namespace BibleIndexerV2.Services.Implementations
             return result;
         }
 
-        private static async Task<IEnumerable<dynamic>?> GetBlob() => _bibleBlob = _bibleBlob == null ? await Api.GetBibleBlob() : _bibleBlob ?? null;
+        private static async Task<IEnumerable<dynamic>?> GetBlob() => _bibleBlob = _bibleBlob == null ? await ApiV2.GetBibleBlob() : _bibleBlob ?? null;
     }
 }
