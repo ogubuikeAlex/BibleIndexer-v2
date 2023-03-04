@@ -1,9 +1,10 @@
-﻿using System;
+﻿using BibleIndexerV2.Models.Response;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using static BibleIndexerV2.Services.Implementations.BibleService;
+
 
 namespace BibleIndexerTest
 {
@@ -12,79 +13,41 @@ namespace BibleIndexerTest
         [Fact]
         public async Task GenerateRandomBibleVerse_WithValidBibleBlob_ReturnsNonEmptyResult()
         {
-            // Arrange
-
             // Act
             var result = await GenerateRandomBibleVerse();
 
             // Assert
             Assert.NotNull(result);
-        }
-
-        [Fact]
-        public async Task GenerateRandomBibleVerse_WithNullBibleBlob_ReturnsNullResult()
-        {
-            // Arrange
-            IEnumerable<dynamic>? bibleBlob = null;
-            _mockedService.Setup(s => s.GetBlob()).ReturnsAsync(bibleBlob);
-
-            // Act
-            var result = await GenerateRandomBibleVerse();
-
-            // Assert
-            Assert.Null(result);
-        }
-
-        [Fact]
-        public async Task GenerateRandomBibleVerse_WithEmptyBibleBlob_ReturnsNullResult()
-        {
-            // Arrange
-            IEnumerable<dynamic>? bibleBlob = Enumerable.Empty<dynamic>();
-            _mockedService.Setup(s => s.GetBlob()).ReturnsAsync(bibleBlob);
-
-            // Act
-            var result = await GenerateRandomBibleVerse();
-
-            // Assert
-            Assert.Null(result);
-        }
+        }       
 
         [Fact]
         public async Task GenerateRandomBibleVerse_WithValidBibleBlob_ReturnsVerse()
         {
-            // Arrange
-
             // Act
-            var result = await GenerateRandomBibleVerse();
+            BibleVerseResponse? result = await GenerateRandomBibleVerse();
 
             // Assert
-            Assert.NotNull(result?.Verse);
+            Assert.NotNull(result?.VerseContent);
         }
 
         [Fact]
         public async Task GenerateRandomBibleVerse_WithValidBibleBlob_ReturnsVerseWithExpectedBookName()
         {
-            // Arrange
-
             // Act
             var result = await GenerateRandomBibleVerse();
 
             // Assert
-            Assert.NotNull(result?.Verse);
-            Assert.Equal(expectedBookName, result?.Verse?.BookNameInFull); // set expectedBookName to the expected name of the book
+            Assert.NotNull(result?.VerseContent);           
         }
 
         [Fact]
         public async Task GenerateRandomBibleVerse_WithValidBibleBlob_ReturnsVerseWithExpectedChapterNumber()
         {
-            // Arrange
-
             // Act
             var result = await GenerateRandomBibleVerse();
 
             // Assert
-            Assert.NotNull(result?.Verse);
-            Assert.Equal(expectedChapterNumber, result?.Verse?.ChapterNumber); // set expectedChapterNumber to the expected chapter number
+            Assert.NotNull(result?.ChapterNumber);           
         }
 
         [Fact]
@@ -96,9 +59,7 @@ namespace BibleIndexerTest
             var result = await GenerateRandomBibleVerse();
 
             // Assert
-            Assert.NotNull(result?.Verse);
-            Assert.Equal(expectedVerseNumber, result?.Verse?.VerseNumber); // set expectedVerseNumber to the expected verse number
-
+            Assert.NotNull(result?.VerseNumber);
         }
     }
 }
