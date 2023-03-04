@@ -1,7 +1,8 @@
-﻿using System;
+﻿using BibleIndexerV2.Models.Request;
+using BibleIndexerV2.Models.Response;
+using BibleIndexerV2.Services.Implementations;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -24,7 +25,7 @@ namespace BibleIndexerTest
                 };
 
                 // Act
-                var response = await BibleApi.GetAllVersesInAChapterOFTheBible(request);
+                var response = await BibleService.GetAllVersesInAChapterOFTheBible(request);
 
                 // Assert
                 Assert.NotNull(response);
@@ -51,7 +52,7 @@ namespace BibleIndexerTest
                 };
 
                 // Act
-                var response = await BibleApi.GetAllVersesInAChapterOFTheBible(request);
+                var response = await BibleService.GetAllVersesInAChapterOFTheBible(request);
 
                 // Assert
                 Assert.Null(response);
@@ -68,7 +69,7 @@ namespace BibleIndexerTest
                 };
 
                 // Act
-                var response = await BibleApi.GetAllVersesInAChapterOFTheBible(request);
+                var response = await BibleService.GetAllVersesInAChapterOFTheBible(request);
 
                 // Assert
                 Assert.Null(response);
