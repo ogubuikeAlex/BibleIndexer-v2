@@ -17,13 +17,11 @@ namespace BibleIndexerV2.Data
         /// <Summary></Summary>:
         private static RestClient GetClient()
         {
-            var url = (new ConfigurationBuilder().AddUserSecrets<BibleService>()).Build().GetSection("api_url").Value;
-            // builder.GetSection("api_url").Get<string>();
-
+            var url = "";
+            
             _client = null ?? new RestClient(url);
             return _client;
-            /*_client = null ?? new RestClient("https://gist.githubusercontent.com/king-Alex-d-great/b32f98847970708f4fbba9c94cd9a3a1/raw/97459a7dc59eaeff42c7f5d22cf1553208430e9f/");
-            return _client;*/
+           
         }
 
 
