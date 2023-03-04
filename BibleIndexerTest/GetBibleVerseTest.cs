@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using BibleIndexerV2.Models.Request;
+using BibleIndexerV2.Models.Response;
+using BibleIndexerV2.Services.Implementations;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -21,7 +20,7 @@ namespace BibleIndexerTest
             };
 
             // Act
-            BibleVerseResponse? result = await BibleApi.GetBibleVerse(request);
+            BibleVerseResponse? result = await BibleService.GetBibleVerse(request);
 
             // Assert
             Assert.Null(result);
@@ -39,7 +38,7 @@ namespace BibleIndexerTest
             };
 
             // Act
-            BibleVerseResponse? result = await BibleApi.GetBibleVerse(request);
+            BibleVerseResponse? result = await BibleService.GetBibleVerse(request);
 
             // Assert
             Assert.Null(result);
@@ -57,7 +56,7 @@ namespace BibleIndexerTest
             };
 
             // Act
-            BibleVerseResponse? result = await BibleApi.GetBibleVerse(request);
+            BibleVerseResponse? result = await BibleService.GetBibleVerse(request);
 
             // Assert
             Assert.NotNull(result);
