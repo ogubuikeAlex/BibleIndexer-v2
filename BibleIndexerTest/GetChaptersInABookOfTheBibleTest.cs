@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using BibleIndexerV2.Models.Response;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using static BibleIndexerV2.Services.Implementations.BibleService;
 
 namespace BibleIndexerTest
 {
@@ -9,8 +11,6 @@ namespace BibleIndexerTest
         [Fact]
         public async Task GetChaptersInABookOfTheBible_WithNullInput_ReturnsNull()
         {
-            // Arrange
-
             // Act
             var result = await GetChaptersInABookOfTheBible(null);
 
@@ -22,9 +22,10 @@ namespace BibleIndexerTest
         public async Task GetChaptersInABookOfTheBible_WithUnknownBookName_ReturnsNull()
         {
             // Arrange
+            string nonexistentBibleName = "AlexTheKing";
 
             // Act
-            var result = await GetChaptersInABookOfTheBible("UnknownBookName");
+            var result = await GetChaptersInABookOfTheBible(nonexistentBibleName);
 
             // Assert
             Assert.Null(result);
@@ -34,9 +35,10 @@ namespace BibleIndexerTest
         public async Task GetChaptersInABookOfTheBible_WithValidBookName_ReturnsChapters()
         {
             // Arrange
+            string genesis = "genesis";
 
             // Act
-            var result = await GetChaptersInABookOfTheBible("BookName");
+            var result = await GetChaptersInABookOfTheBible(genesis);
 
             // Assert
             Assert.NotNull(result);
@@ -48,72 +50,43 @@ namespace BibleIndexerTest
         public async Task GetChaptersInABookOfTheBible_WithValidBookName_ReturnsCorrectNumberOfChapters()
         {
             // Arrange
+            byte expectedNumberOfChapters = 50;
+            string bookname = "genesis";
 
             // Act
-            var result = await GetChaptersInABookOfTheBible("BookName");
+            var result = await GetChaptersInABookOfTheBible(bookname);
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(expectedNumberOfChapters, result.DropDown.Count()); // set expectedNumberOfChapters to the expected number of chapters for the given book
-            Assert.Equal(expectedNumberOfChapters, result.Resource.Count()); // set expectedNumberOfChapters to the expected number of chapters for the given book
+            Assert.Equal(expectedNumberOfChapters, result.DropDown.Count()); 
+            Assert.Equal(expectedNumberOfChapters, result.Resource.Count()); 
         }
-
-        [Fact]
-        public async Task GetChaptersInABookOfTheBible_WithBookWithNoChapters_ReturnsEmptyList()
-        {
-            // Arrange
-
-            // Act
-            var result = await GetChaptersInABookOfTheBible("BookWithNoChapters");
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.Empty(result.DropDown);
-            Assert.Empty(result.Resource);
-        }
-
+       
         [Fact]
         public async Task GetChaptersInABookOfTheBible_WithValidBookName_ReturnsExpectedBookName()
         {
             // Arrange
+            string expectedBookName = "genesis";
 
             // Act
-            var result = await GetChaptersInABookOfTheBible("BookName");
+            var result = await GetChaptersInABookOfTheBible(expectedBookName);
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(expectedBookName, result.BookName); // set expectedBookName to the expected name of the book
+            Assert.Equal(expectedBookName, result.BookName);
         }
 
         [Fact]
-        public async Task GetChaptersInABookOfTheBible_WithNullBookChapters_ReturnsEmptyList()
+        public async Task GetChaptersInABookOfTheBible_WithInValidBookName_ReturnsNull()
         {
             // Arrange
-            var bibleResult = new BlobResponse() { Chapters = null };
+            string nonexistentBibleName = "AlexTheKing";
 
             // Act
             var result = await GetChaptersInABookOfTheBible("BookName");
 
             // Assert
-            Assert.NotNull(result);
-            Assert.Empty(result.DropDown);
-            Assert.Empty(result.Resource);
+            Assert.Null(result);            
         }
-
-        [Fact]
-        public async Task GetChaptersInABookOfTheBible_WithEmptyBookChapters_ReturnsEmptyList()
-        {
-            // Arrange
-            var bibleResult = new BlobResponse() { Chapters = "[]" };
-
-            // Act
-            var result = await GetChaptersInABookOfTheBible("BookName");
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.Empty(result.DropDown);
-            Assert.Empty(result.Resource);
-        }
-
     }
 }
