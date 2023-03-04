@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using BibleIndexerV2.Models.Response;
+using BibleIndexerV2.Services.Implementations;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -16,7 +14,7 @@ namespace BibleIndexerTest
             string bookName = "Nonexistent Book";
 
             // Act
-            BlobResponse? result = await BibleApi.GetBookOfTheBible(bookName);
+            BlobResponse? result = await BibleService.GetBookOfTheBible(bookName);
 
             // Assert
             Assert.Null(result);
@@ -29,7 +27,7 @@ namespace BibleIndexerTest
             string bookName = "john";
 
             // Act
-            BlobResponse? result = await BibleApi.GetBookOfTheBible(bookName);
+            BlobResponse? result = await BibleService.GetBookOfTheBible(bookName);
 
             // Assert
             Assert.NotNull(result);
