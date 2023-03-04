@@ -1,8 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BibleIndexerV2.Services.Implementations;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BibleIndexerV2.Benchmark
