@@ -12,7 +12,7 @@ namespace BibleIndexerV2.Benchmark
         [Benchmark]
         public async Task SearchBibleV2()
         {
-            var results = await BibleService.SearchBibleV2(_query);
+            var results = await BibleService.SearchBible(_query);
         }
     }
 }
