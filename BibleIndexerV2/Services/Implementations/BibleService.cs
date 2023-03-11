@@ -126,46 +126,11 @@ namespace BibleIndexerV2.Services.Implementations
             };
         }
 
+       
+       
+
         /// <Summary>Get all occurences of a word in the bible</Summary>
         public static async Task<IEnumerable<BibleVerseResponse>> SearchBible(string query)
-        {
-            query = string.IsNullOrEmpty(query) ? throw new InvalidOperationException("Invalid query") : query.ToLower().Trim();
-
-            IEnumerable<dynamic> bibleBlob = await GetBlob();
-
-            if (!bibleBlob.Any()) return Enumerable.Empty<BibleVerseResponse>();
-
-            List<BibleVerseResponse> result = new List<BibleVerseResponse>();
-
-            Parallel.ForEach(bibleBlob, (blob, state, index) =>
-            {
-                BlobResponse deserializedBlob = JsonConvert.DeserializeObject<BlobResponse>(Convert.ToString(blob));
-
-                Parallel.ForEach(deserializedBlob.Chapters, (chapter, state, chapterIndex) =>
-                {
-                    Parallel.ForEach(chapter, (verse, state, verseIndex) =>
-                    {
-                        if (verse.ToLower().Contains(query))
-                        {
-                            result.Add(new BibleVerseResponse()
-                            {
-                                BookName = deserializedBlob.Name,
-                                BookNumber = (int)index + first,
-                                ChapterNumber = (int)chapterIndex + first,
-                                VerseNumber = (int)verseIndex + first,
-                                VerseContent = verse
-                            });
-                        }
-                    });
-                });
-
-            });
-
-            return result;
-
-        }
-
-        public static async Task<IEnumerable<BibleVerseResponse>> SearchBibleV2(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
             {
