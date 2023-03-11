@@ -26,7 +26,7 @@ namespace BibleIndexerV2.Services.Implementations
             BlobResponse? bibleResult = await GetBookOfTheBible(name);
             if (bibleResult is null) return null;
             int count = 0;
-            
+
             IEnumerable<dynamic>? chaptersDropdown = bibleResult.Chapters?.Select(x => new { Id = count += 1 });
 
             return new ChaptersResponse()
@@ -104,15 +104,25 @@ namespace BibleIndexerV2.Services.Implementations
         ///<Summary>Get a bible verse</Summary>
         public static async Task<BibleVerseResponse?> GetBibleVerse(GetBibleVerseRequest request)
         {
-            BlobResponse? bookResponse = await GetBookOfTheBible(request.BookNameInFull);
-            if (bookResponse is null) return null;
+            BlobResponse? bookResponse = null;
+            string verseContent = string.Empty;
+            try
+            {
+                bookResponse = await GetBookOfTheBible(request.BookNameInFull);
+                if (bookResponse is null) return null;
+                verseContent = bookResponse?.Chapters[request.ChapterNumber - first][request.VerseNumber - first];
+            }
+            catch
+            {
+                return null;
+            }
 
             return new BibleVerseResponse()
             {
                 BookName = request.BookNameInFull,
                 ChapterNumber = request.ChapterNumber,
                 VerseNumber = request.VerseNumber,
-                VerseContent = bookResponse.Chapters[request.ChapterNumber - first][request.VerseNumber - first]
+                VerseContent = verseContent
             };
         }
 
