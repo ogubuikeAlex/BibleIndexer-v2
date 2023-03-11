@@ -1,5 +1,6 @@
 ﻿using BibleIndexerV2.Models.Response;
 using BibleIndexerV2.Services.Implementations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,13 +16,13 @@ namespace BibleIndexerTest
             public async Task GetAllBooksOfTheBible_ShouldReturnListOfBooks()
             {
                 // Arrange
-                
+
                 // Act
                 object books = await BibleService.GetAllBooksOfTheBible();
 
                 // Assert
                 Assert.NotNull(books);
-                Assert.IsType<List<object>>(books);                
+                Assert.IsType<List<object>>(books);
             }
 
             [Fact]
@@ -31,10 +32,10 @@ namespace BibleIndexerTest
                 var expectedBookCount = 66; // The Bible has 66 books
 
                 // Act
-                IEnumerable<GetAllBookResonse> bookList = await BibleService.GetAllBooksOfTheBible();               
+                IEnumerable<GetAllBookResonse> bookList = await BibleService.GetAllBooksOfTheBible();
 
                 //Assert
-                Assert.Equal(expectedBookCount, bookList.Count());                
+                Assert.Equal(expectedBookCount, bookList.Count());
             }
 
             [Theory]
@@ -58,27 +59,22 @@ namespace BibleIndexerTest
                 Assert.True(book.GetType().GetProperty("BookName") != null);
             }
 
-            /*[Fact]
-            public async Task GetAllBooksOfTheBible_ShouldReturnSixtySixBooksOfTheBible()
+            [Fact]
+            public async Task GetAllBooksOfTheBible_ShouldReturnTheIdAndBookName()
             {
                 // Arrange
-                var expectedBookCount = 66; // The Bible has 66 books
+                const int indexOne = 0;
+                const string expectedBookName = "genesis";
+                const string expectedBookId = "gn";
 
                 // Act
-                object books = await BibleService.GetAllBooksOfTheBible();
+                IEnumerable<GetAllBookResonse> books = await BibleService.GetAllBooksOfTheBible();
+                GetAllBookResonse book = books.ElementAt(indexOne);
 
-                // Assert
-                //Assert.NotNull(books);
-                // Assert.IsType<List<object>>(books);
-
-                var bookList = books as List<object>;
-                Assert.Equal(expectedBookCount, bookList.Count);
-
-                object firstBook = bookList.FirstOrDefault();
-                Assert.NotNull(firstBook);
-                Assert.True(firstBook.GetType().GetProperty("Id") != null);
-                Assert.True(firstBook.GetType().GetProperty("Book") != null);
-            }*/
+                // Assert                
+                Assert.True(book.Id.ToLower() == expectedBookId);
+                Assert.True(book.BookName.ToLower() == expectedBookName);
+            }
 
 
         }
