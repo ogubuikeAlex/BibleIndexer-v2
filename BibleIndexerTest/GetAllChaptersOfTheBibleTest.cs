@@ -61,6 +61,7 @@ namespace BibleIndexerTest
 
                 // Assert
                 Assert.Null(response.Resource);
+                Assert.True(!response.DropDown.Any());
                 Assert.IsAssignableFrom<IEnumerable<dynamic>>(response.DropDown);
             }
 
@@ -89,11 +90,15 @@ namespace BibleIndexerTest
             public async Task GetAllVersesInAChapterOFTheBible_ShouldNotReturnNull_WhenValidBookName()
             {
                 // Arrange
+                const int invalidChapterNumber = 1;
+                const int verseNumber = 1;
+                const string bookName = "genesis";
+
                 var request = new GetBibleVerseRequest
                 {
-                    BookNameInFull = "InvalidBook",
-                    ChapterNumber = 1,
-                    VerseNumber= 1
+                    BookNameInFull = bookName,
+                    ChapterNumber = invalidChapterNumber,
+                    VerseNumber = verseNumber
                 };
 
                 // Act
