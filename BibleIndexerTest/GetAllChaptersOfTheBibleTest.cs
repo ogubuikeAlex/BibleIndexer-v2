@@ -42,7 +42,7 @@ namespace BibleIndexerTest
             }
 
             [Fact]
-            public async Task GetAllVersesInAChapterOFTheBible_ShouldReturnCorrectBookName()
+            public async Task GetAllVersesInAChapterOFTheBible_ShouldReturnCorrectBookName_WHenValidBookName()
             {
                 // Arrange
                 var bookNameInfull = "genesis"; 
