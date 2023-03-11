@@ -26,15 +26,14 @@ namespace BibleIndexerV2.Services.Implementations
             BlobResponse? bibleResult = await GetBookOfTheBible(name);
             if (bibleResult is null) return null;
             int count = 0;
-
-            List<List<string>>? bookChapters = JsonConvert.DeserializeObject<List<List<string>>>(Convert.ToString(bibleResult.Chapters));
-            IEnumerable<dynamic>? chaptersDropdown = bookChapters?.Select(x => new { Id = count += 1 });
+            
+            IEnumerable<dynamic>? chaptersDropdown = bibleResult.Chapters?.Select(x => new { Id = count += 1 });
 
             return new ChaptersResponse()
             {
                 DropDown = chaptersDropdown ?? Enumerable.Empty<dynamic>(),
                 BookName = bibleResult?.Name ?? string.Empty,
-                Resource = bookChapters ?? Enumerable.Empty<List<string>>(),
+                Resource = bibleResult?.Chapters ?? Enumerable.Empty<List<string>>(),
             };
         }
 
