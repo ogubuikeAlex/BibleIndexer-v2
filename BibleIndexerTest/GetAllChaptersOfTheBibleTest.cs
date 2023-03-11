@@ -42,7 +42,7 @@ namespace BibleIndexerTest
             }
 
             [Fact]
-            public async Task GetAllVersesInAChapterOFTheBible_ShouldReturnCorrectBookName_WHenValidBookName()
+            public async Task GetAllVersesInAChapterOFTheBible_ShouldReturnCorrectBookName_WhenValidBookName()
             {
                 // Arrange
                 var bookNameInfull = "genesis"; 
@@ -59,6 +59,27 @@ namespace BibleIndexerTest
 
                 // Assert                
                 Assert.Equal(request.BookNameInFull, response.BookName.ToLower());               
+            }
+
+            [Fact]
+            public async Task GetAllVersesInAChapterOFTheBible_ShouldReturnCorrectVerseCount_WhenValidBookNameAndValidChapterNumber()
+            {
+                // Arrange
+                var bookNameInfull = "genesis";
+                var chapterNumber = 1;
+                var expectedVersesCount = 31;
+
+                var request = new GetBibleVerseRequest
+                {
+                    BookNameInFull = bookNameInfull,
+                    ChapterNumber = chapterNumber,
+                };
+
+                // Act
+                var response = await BibleService.GetAllVersesInAChapterOFTheBible(request);
+
+                // Assert                
+                Assert.Equal(expectedVersesCount, response.DropDown.Count());
             }
 
             [Fact]
