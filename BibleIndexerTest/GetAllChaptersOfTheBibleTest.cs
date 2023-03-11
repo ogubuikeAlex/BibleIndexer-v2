@@ -47,8 +47,9 @@ namespace BibleIndexerTest
                 // Arrange
                 var request = new GetBibleVerseRequest
                 {
-                    BookNameInFull = "Genesis",
+                    BookNameInFull = "InvalidBook",
                     ChapterNumber = 100,
+                    VerseNumber= 1
                 };
 
                 // Act
@@ -59,13 +60,14 @@ namespace BibleIndexerTest
             }
 
             [Fact]
-            public async Task GetAllVersesInAChapterOFTheBible_ShouldReturnNull_WhenInvalidBookName()
+            public async Task GetAllVersesInAChapterOFTheBible_ShouldNotReturnNull_WhenValidBookName()
             {
                 // Arrange
                 var request = new GetBibleVerseRequest
                 {
                     BookNameInFull = "InvalidBook",
                     ChapterNumber = 1,
+                    VerseNumber= 1
                 };
 
                 // Act
