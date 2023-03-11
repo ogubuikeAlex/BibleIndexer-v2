@@ -21,6 +21,8 @@ namespace BibleIndexerV2.Services.Implementations
         ///<Summary>Get the chapters in a book of the bible using the full name of the boo or via the book abbreviation. This will also return a cascading dropdown for all chapters in specified book</Summary>        
         public static async Task<ChaptersResponse?> GetChaptersInABookOfTheBible(string name)
         {
+            if (string.IsNullOrWhiteSpace(name)) return null;
+
             BlobResponse? bibleResult = await GetBookOfTheBible(name);
             if (bibleResult is null) return null;
             int count = 0;
