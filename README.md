@@ -40,12 +40,12 @@ A comprehensive library for querying bible content and getting cascading dropdow
 First, install NuGet. Then, install BibleIndexer from the package manager console:
 
 ```C#   
-   NuGet\Install-Package BibleIndexer.Query -Version 1.0.0
+   NuGet\Install-Package BibleIndexer.Query -Version 1.1.1
 ```
 
 Or from the .NET CLI as:
 ```C#   
-   dotnet add package BibleIndexer.Query --version 1.0.0
+   dotnet add package BibleIndexer.Query --version 1.1.1
 ```
 
 Finally, import into the file:
