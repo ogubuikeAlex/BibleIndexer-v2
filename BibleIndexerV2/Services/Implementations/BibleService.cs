@@ -76,8 +76,8 @@ namespace BibleIndexerV2.Services.Implementations
             BlobResponse? bookResponse = await GetBookOfTheBible(request.BookNameInFull);
             if (bookResponse is null) return null;
             int count = 0;
-            IEnumerable<string> verses = bookResponse.Chapters.ElementAt(request.ChapterNumber - first);
-            IEnumerable<dynamic> versesDropdown = verses.Any() ? verses.Select(x => new { Id = count += 1 }) : Enumerable.Empty<dynamic>();
+            IEnumerable<string> verses = bookResponse.Chapters.ElementAtOrDefault(request.ChapterNumber - first);
+            IEnumerable<dynamic> versesDropdown = verses != null && verses.Any() ? verses.Select(x => new { Id = count += 1 }) : Enumerable.Empty<dynamic>();
 
             return new VersesResponse()
             {
