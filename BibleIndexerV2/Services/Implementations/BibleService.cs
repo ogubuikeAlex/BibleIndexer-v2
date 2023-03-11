@@ -57,15 +57,16 @@ namespace BibleIndexerV2.Services.Implementations
         }
 
         ///<Summary>Gets all books of the bible together with their abbreviations</Summary>
-        public static async Task<object> GetAllBooksOfTheBible()
+        public static async Task<IEnumerable<GetAllBookResonse>> GetAllBooksOfTheBible()
         {
             IEnumerable<dynamic>? bibleBlob = await GetBlob();
 
-            if (bibleBlob is null) return bibleBlob;
-            return bibleBlob.Select(bibleBlob => new
+            if (bibleBlob is null) return Enumerable.Empty<GetAllBookResonse>();
+
+            return bibleBlob.Select(bibleBlob => new GetAllBookResonse()
             {
                 Id = bibleBlob.Abbreviation,
-                Book = bibleBlob.Name,
+                BookName = bibleBlob.Name,
             });
         }
 
