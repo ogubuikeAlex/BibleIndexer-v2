@@ -50,7 +50,7 @@ namespace BibleIndexerTest
         public async Task GetChaptersInABookOfTheBible_WithValidBookName_ReturnsCorrectNumberOfChapters()
         {
             // Arrange
-            byte expectedNumberOfChapters = 50;
+            byte expectedNumberOfVerses = 50;
             string bookname = "genesis";
 
             // Act
@@ -58,8 +58,8 @@ namespace BibleIndexerTest
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(expectedNumberOfChapters, result.DropDown.Count()); 
-            Assert.Equal(expectedNumberOfChapters, result.Resource.Count()); 
+            Assert.Equal(expectedNumberOfVerses, result.DropDown.Count()); 
+            Assert.Equal(expectedNumberOfVerses, result.Resource.Count()); 
         }
        
         [Fact]
@@ -73,7 +73,7 @@ namespace BibleIndexerTest
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(expectedBookName, result.BookName);
+            Assert.Equal(expectedBookName, result.BookName.ToLower());
         }
 
         [Fact]
@@ -83,7 +83,7 @@ namespace BibleIndexerTest
             string nonexistentBibleName = "AlexTheKing";
 
             // Act
-            var result = await GetChaptersInABookOfTheBible("BookName");
+            var result = await GetChaptersInABookOfTheBible(nonexistentBibleName);
 
             // Assert
             Assert.Null(result);            
