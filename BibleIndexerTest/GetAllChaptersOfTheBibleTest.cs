@@ -73,7 +73,7 @@ namespace BibleIndexerTest
 
                 // Assert
                 Assert.Null(response.Resource);
-                Assert.True(!response.DropDown.Any());
+                Assert.Empty(response.DropDown);
                 Assert.IsAssignableFrom<IEnumerable<dynamic>>(response.DropDown);
             }
 
