@@ -107,6 +107,29 @@ namespace BibleIndexerTest
                 // Assert
                 Assert.NotNull(response);
             }
+
+            [Theory]
+            [InlineData("exodus")]
+            [InlineData("genesis")]
+            public async Task GetAllVersesInAChapterOFTheBible_ShouldReturnVersesResponse_WhenValidBookName(string bookName)
+            {
+                // Arrange
+                const int invalidChapterNumber = 1;
+                const int verseNumber = 1;                
+
+                var request = new GetBibleVerseRequest
+                {
+                    BookNameInFull = bookName,
+                    ChapterNumber = invalidChapterNumber,
+                    VerseNumber = verseNumber
+                };
+
+                // Act
+                VersesResponse response = await BibleService.GetAllVersesInAChapterOFTheBible(request);
+
+                // Assert
+                Assert.IsType<VersesResponse>(response);
+            }
         }
 
     }
