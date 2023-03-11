@@ -37,7 +37,48 @@ namespace BibleIndexerTest
                 Assert.Equal(expectedBookCount, bookList.Count());                
             }
 
-           
+            [Theory]
+            [InlineData(1)]
+            [InlineData(30)]
+            [InlineData(66)]
+            public async Task GetAllBooksOfTheBible_ShouldReturnGetAllBookResponse(int index)
+            {
+                // Arrange
+                const int one = 1;
+                var queryIndex = index - one;
+
+                // Act
+                IEnumerable<GetAllBookResonse> books = await BibleService.GetAllBooksOfTheBible();
+                GetAllBookResonse book = books.ElementAt(index - 1);
+
+                // Assert
+                Assert.NotNull(book);
+                Assert.IsType<GetAllBookResonse>(book);
+                Assert.True(book.GetType().GetProperty("Id") != null);
+                Assert.True(book.GetType().GetProperty("BookName") != null);
+            }
+
+            /*[Fact]
+            public async Task GetAllBooksOfTheBible_ShouldReturnSixtySixBooksOfTheBible()
+            {
+                // Arrange
+                var expectedBookCount = 66; // The Bible has 66 books
+
+                // Act
+                object books = await BibleService.GetAllBooksOfTheBible();
+
+                // Assert
+                //Assert.NotNull(books);
+                // Assert.IsType<List<object>>(books);
+
+                var bookList = books as List<object>;
+                Assert.Equal(expectedBookCount, bookList.Count);
+
+                object firstBook = bookList.FirstOrDefault();
+                Assert.NotNull(firstBook);
+                Assert.True(firstBook.GetType().GetProperty("Id") != null);
+                Assert.True(firstBook.GetType().GetProperty("Book") != null);
+            }*/
 
 
         }
