@@ -25,8 +25,8 @@ We welcome code contributions from everyone! To contribute code, please follow t
 - Create a new branch for your changes
 - Make your changes and commit them to your branch
 - Push your branch to your forked repository on GitHub
-- Submit a pull request from your branch to our main repository
+- Submit a pull request from your branch to our master repository <br>
 Please ensure that your code follows our coding style and conventions, and that it includes tests for any new functionality or bug fixes.
 
 ## Code of Conduct
-Please note that we have a code of conduct in place to ensure that our project is a welcoming and inclusive environment for everyone. By contributing to our project, you agree to abide by our code of conduct. You can read our code of conduct here.
+Please note that we have a code of conduct in place to ensure that our project is a welcoming and inclusive environment for everyone. By contributing to our project, you agree to abide by our code of conduct. You can read our code of conduct [here](https://github.com/king-Alex-d-great/BibleIndexer-v2/blob/master/code_of_conduct.md).
