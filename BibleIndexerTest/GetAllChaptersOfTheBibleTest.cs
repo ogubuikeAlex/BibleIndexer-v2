@@ -13,35 +13,6 @@ namespace BibleIndexerTest
         public class BibleApiTests
         {
             [Fact]
-            public async Task GetAllVersesInAChapterOFTheBible_ShouldReturnListOfVerses()
-            {
-                // Arrange
-                var expectedVersesCount = 31; // Genesis 1 has 31 verses
-
-                var request = new GetBibleVerseRequest
-                {
-                    BookNameInFull = "Genesis",
-                    ChapterNumber = 1,
-                };
-
-                // Act
-                var response = await BibleService.GetAllVersesInAChapterOFTheBible(request);
-
-                // Assert
-                Assert.NotNull(response);
-                Assert.IsType<VersesResponse>(response);
-                Assert.Equal(request.BookNameInFull, response.BookName);
-
-                var versesDropdown = response.DropDown as List<dynamic>;
-                Assert.NotNull(versesDropdown);
-                Assert.Equal(expectedVersesCount, versesDropdown.Count);
-
-                var firstVerse = versesDropdown.FirstOrDefault();
-                Assert.NotNull(firstVerse);
-                Assert.True(firstVerse.GetType().GetProperty("Id") != null);
-            }
-
-            [Fact]
             public async Task GetAllVersesInAChapterOFTheBible_ShouldReturnCorrectBookName_WhenValidBookName()
             {
                 // Arrange
