@@ -22,6 +22,12 @@ namespace BibleIndexerV2.Models.Response
         public List<ChapterResonse> Chapters { get; set; }
     }
 
+    public class GetAllBookResonse
+    {
+        public string Id { get; set; }
+        public string BookName { get; set; }
+    }
+
     public class BlobResponse
     {
         public string Abbrev { get; set; }
