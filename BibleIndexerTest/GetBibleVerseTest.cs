@@ -1,6 +1,7 @@
 ﻿using BibleIndexerV2.Models.Request;
 using BibleIndexerV2.Models.Response;
 using BibleIndexerV2.Services.Implementations;
+using System;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -9,7 +10,7 @@ namespace BibleIndexerTest
     public class GetBibleVerseTest
     {
         [Fact]
-        public async Task GetBibleVerse_Returns_Null_When_Book_Not_Found()
+        public async Task GetBibleVerse_ReturnsNull_WhenBookNotFound()
         {
             // Arrange
             GetBibleVerseRequest request = new GetBibleVerseRequest()
@@ -27,7 +28,7 @@ namespace BibleIndexerTest
         }
 
         [Fact]
-        public async Task GetBibleVerse_Returns_Null_When_Verse_Not_Found()
+        public async Task GetBibleVerse_ReturnsNull_WhenVerseIndexIsOutOfRange()
         {
             // Arrange
             GetBibleVerseRequest request = new GetBibleVerseRequest()
@@ -40,12 +41,12 @@ namespace BibleIndexerTest
             // Act
             BibleVerseResponse? result = await BibleService.GetBibleVerse(request);
 
-            // Assert
+            // Assert           
             Assert.Null(result);
         }
 
         [Fact]
-        public async Task GetBibleVerse_Returns_Correct_Verse_Content()
+        public async Task GetBibleVerse_ReturnsCorrectVerseContent_WithCorrectVerseNumber()
         {
             // Arrange
             GetBibleVerseRequest request = new GetBibleVerseRequest()
