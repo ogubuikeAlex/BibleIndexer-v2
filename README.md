@@ -9,14 +9,13 @@ A comprehensive library for querying bible content and getting cascading dropdow
 
 - [King Alex](https://github.com/king-Alex-d-great)
 
-
-## Badges
+## **Badges**
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-![InstallmentCop](https://user-images.githubusercontent.com/58665121/215287594-c8ae9e26-b377-40f6-869b-91557173807b.png)
 
+stable release version: ![version](https://img.shields.io/badge/version-1.1.1-blue)
 
-
+Nuget package downloads: ![downloads](https://img.shields.io/badge/downloads-500-brightgreen)
 
 ## Features
 - Get a bible verse
