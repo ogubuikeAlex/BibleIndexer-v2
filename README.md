@@ -49,7 +49,7 @@ Or from the .NET CLI as:
 
 Finally, import into the file:
 ```C#   
-   using BibleIndexer;
+   using BibleIndexerV2;
 ```
 ## Doc Reference
 
