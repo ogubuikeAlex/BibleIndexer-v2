@@ -18,7 +18,7 @@ namespace BibleIndexerV2.Services.Implementations
         const int bibleBookCount = 66;
         private static IEnumerable<dynamic>? _bibleBlob;
 
-        ///<Summary>Get the chapters in a book of the bible using the full name of the boo or via the book abbreviation. This will also return a cascading dropdown for all chapters in specified book</Summary>        
+        ///<Summary>Get the chapters in a book of the bible using the full name of the book or via the book abbreviation. This will also return a cascading dropdown for all chapters in specified book</Summary>        
         public static async Task<ChaptersResponse?> GetChaptersInABookOfTheBible(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) return null;
